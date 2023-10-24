@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { memo, useContext } from "react";
 
 import Toast from "../Toast";
 import styles from "./ToastShelf.module.css";
@@ -6,9 +6,14 @@ import { ToastsContext } from "../ToastProvider/ToastProvider";
 
 function ToastShelf() {
   const { toasts } = useContext(ToastsContext);
-
+  console.log('qweqwe');
   return (
-    <ol className={styles.wrapper}>
+    <ol
+      role="alert"
+      aria-live="assertive"
+      aria-label="Notification"
+      className={styles.wrapper}
+    >
       {toasts.map(({ message, variant, id }) => (
         <li key={id} className={styles.toastWrapper}>
           <Toast variant={variant} message={message} id={id} />
@@ -18,4 +23,4 @@ function ToastShelf() {
   );
 }
 
-export default ToastShelf;
+export default memo(ToastShelf);
